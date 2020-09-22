@@ -262,3 +262,25 @@ const server = http.createServer((req, res) => {
 server.listen(3030);
 ```
 
+获取表单数据
+
+```javascript
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+       let postData = '';
+       req.on('data', data => {
+           postData += data
+       })
+       req.on('end', ()=>{
+           console.log(postData.toString());
+       })
+       req.on('error', err => {
+           console.log(err)
+       })
+});
+
+server.listen(3030);
+```
+
+原生似乎只能获取x-www-form-urlencoded的表单数据
